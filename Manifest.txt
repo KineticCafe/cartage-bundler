@@ -1,0 +1,9 @@
+Contributing.md
+History.md
+Licence.md
+Manifest.txt
+README.rdoc
+Rakefile
+lib/cartage/plugins/bundler.rb
+test/minitest_config.rb
+test/test_cartage_bundler.rb

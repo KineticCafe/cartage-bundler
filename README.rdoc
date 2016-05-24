@@ -1,0 +1,107 @@
+= cartage-bundler by Kinetic Cafe
+
+code :: https://github.com/KineticCafe/cartage-bundler/
+issues :: https://github.com/KineticCafe/cartage-bundler/issues
+continuous integration :: {<img src="https://travis-ci.org/KineticCafe/cartage-bundler.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/KineticCafe/cartage-bundler]
+
+== Description
+
+cartage-bundler is a plug-in for
+{cartage}[https://github.com/KineticCafe/cartage] that uses Ruby
+{Bundler}[http://bundler.io] to install application dependencies into the
+<tt>vendor/bundle</tt> path to allow for clean deployments in environments with
+strict access control rules and without requiring development tools on
+production servers.
+
+Cartage provides a repeatable means to create a package for a server-side
+application that can be used in deployment with a configuration tool like
+Ansible, Chef, Puppet, or Salt.
+
+== Synopsis & Configuration
+
+cartage-bundler is a <tt>:vendor_dependencies</tt> plug-in which will fetch the
+current version of Bundler and perform a <tt>bundle install</tt> if a +Gemfile+
+is found.
+
+    gem fetch bundler
+    bundle install --deployment --clean --jobs=4 --without development test
+
+This can be configured in the <tt>plugins.bundler</tt> section of the Cartage
+configuration file.
+
+    ---
+    plugins:
+      bundler:
+        disabled: false
+        gemfile: Gemfile
+        jobs: 4
+        without_groups:
+          - development
+          - test
+        extra_without_groups: []
+
+As with all Cartage plug-ins, cartage-bundler can be disabled explicitly by
+setting +disabled+ to +true+. The other settings are as follows:
+
++gemfile+:: Provides an alternate name and/or path to the Bundler gemfile. The
+            +gemfile+ option specifies a path relative to the package work
+            path, ending in the name of the gemfile.
+
+                gemfile: jruby.gemfile
+                gemfile: jruby/Gemfile
+
++jobs+:: Provides the number of parallel execution streams.
+
+             jobs: 2
+             jobs: 8
+
++without_groups+:: An array of the gem groups that should be *excluded* from
+                   installation. If not provided, excludes the +development+
+                   and +test+ groups. Provide an empty array to include all
+                   groups. A specified array for +without_groups+ *replaces*
+                   the default array, so the *default* groups must be provided
+                   in addition to the *new* groups when using this
+                   configuration option.
+
+                       without_groups: [] # All groups will be installed.
+                       without_groups: # All groups except development, test, and assets.
+                         - development
+                         - test
+                         - assets
+
++extra_without_groups+:: An array of *additional* gem groups that should be
+                         *excluded* from installation. This adds to the default
+                         list of +without_groups+ (groups +development+ and
+                         +test+).
+
+                             # All groups except development, test, and assets.
+                             extra_without_groups:
+                               - assets
+
+== Install
+
+Add cartage-bundler to your Gemfile:
+
+    gem 'cartage-bundler', '~> 1.0'
+
+Or manually install:
+
+  % gem install cartage-bundler
+
+== cartage-bundler Semantic Versioning
+
+cartage-bundler uses a {Semantic Versioning}[http://semver.org/] scheme with one
+change:
+
+* When PATCH is zero (+0+), it will be omitted from version references.
+
+cartage-bundler will generally track cartage for major versions to ensure plugin API
+compatibility.
+
+== Community and Contributing
+
+cartage-bundler welcomes your contributions as described in
+{Contributing.md}[https://github.com/KineticCafe/cartage-bundler/blob/master/Contributing.md].
+This project, like all Kinetic Cafe {open source
+projects}[https://github.com/KineticCafe], is under the Kinetic Cafe Open
+Source {Code of Conduct}[https://github.com/KineticCafe/code-of-conduct].
