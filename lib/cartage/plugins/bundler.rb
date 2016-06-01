@@ -11,7 +11,7 @@ end
 #
 # It supports the following configuration options in +plugins.bundler+:
 #
-# +disabled+:: Whether Cartage::Bundler is disnabled. In addition to explicitly
+# +disabled+:: Whether Cartage::Bundler is disabled. In addition to explicitly
 #              disabling Cartage::Bundler, it will disable itself if the
 #              Gemfile does not exist.
 # +gemfile+:: Provides an alternate name and/or path to the Bundler gemfile.
