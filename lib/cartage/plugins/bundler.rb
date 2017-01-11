@@ -101,6 +101,8 @@ class Cartage::Bundler < Cartage::Plugin
         cartage.run bundle_command
       end
     end
+
+    cartage.plugins.request(:post_bundle_install)
   end
 
   def bundle_command
