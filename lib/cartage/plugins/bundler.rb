@@ -50,7 +50,7 @@ end
 #                               extra_without_groups:
 #                                 - assets
 class Cartage::Bundler < Cartage::Plugin
-  VERSION = '1.0' # :nodoc:
+  VERSION = '1.1' # :nodoc:
 
   # Cartage::Bundler is only enabled if the Gemfile exists.
   def disabled?

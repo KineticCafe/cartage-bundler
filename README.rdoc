@@ -29,6 +29,9 @@ is found.
 This can be configured in the <tt>plugins.bundler</tt> section of the Cartage
 configuration file.
 
+After bundle install is complete, the +post_bundle_install+ feature will be
+requested if any other plug-ins offer it.
+
     ---
     plugins:
       bundler:

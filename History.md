@@ -1,3 +1,11 @@
+### 1.1 / 2016-02-17
+
+*   1 minor enhancement
+
+    *   cartage-bundler now requests the `post_bundle_install` plug-in feature
+        after the install is complete, allowing other plug-ins to depend on the
+        completion of cartage-bundler in the packaging process.
+
 ### 1.0 / 2016-05-31
 
 *   1 major enhancement
