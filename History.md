@@ -1,3 +1,10 @@
+### 1.2 / 2016-02-19
+
+*   1 minor enhancement
+
+    *   cartage-bundler now adds Cartage#run_without_bundler as a convenience
+        method for dependent plug-ins to use.
+
 ### 1.1 / 2016-02-17
 
 *   1 minor enhancement
