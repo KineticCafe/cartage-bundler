@@ -5,6 +5,14 @@ require 'bundler'
 
 # Cartage, a reliable package builder.
 class Cartage
+  # A utility method for Cartage plug-ins to run a +command+ in the shell
+  # without the current Bundler environment. If Bundler is not in use, acts
+  # just like #run.
+  def run_without_bundler(command)
+    runner = -> { run(command) }
+    return runner.call unless defined?(::Bundler)
+    ::Bundler.with_clean_env(&runner)
+  end
 end
 
 # Cartage::Bundler is a +:vendor_dependencies+ plug-in for Cartage.
@@ -50,7 +58,7 @@ end
 #                               extra_without_groups:
 #                                 - assets
 class Cartage::Bundler < Cartage::Plugin
-  VERSION = '1.1' # :nodoc:
+  VERSION = '1.2' # :nodoc:
 
   # Cartage::Bundler is only enabled if the Gemfile exists.
   def disabled?
